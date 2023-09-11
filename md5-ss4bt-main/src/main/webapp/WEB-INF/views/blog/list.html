@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+<h1>List Blog</h1>
+<a href="/createBlog"> Add new Blog</a>
+<a href="/category">List Category</a>
+<table border="10" cellpadding="20" cellspacing="10">
+    <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th colspan="2">Action</th>
+    </tr>
+    <tr th:each="b :${blogs}" >
+        <td th:text="${b.id}"></td>
+        <td th:text="${b.title}"></td>
+        <td th:text="${b.content}"></td>
+        <td th:if="${b.category != null}" th:text="${b.category.name}"></td>
+        <td th:unless="${b.category != null}"></td>
+        <td th:text="${b.status ? 'Active' : 'InActive'}"></td>
+        <td><a th:href="@{|/editBlog/${b.id}|}">Edit</a></td>
+        <td><a th:href="@{|/deleteBlog/${b.id}|}">Delete</a></td> <
+    </tr>
+
+</table>
+</body>
+</html>
